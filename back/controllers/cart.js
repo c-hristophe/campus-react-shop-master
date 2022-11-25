@@ -21,7 +21,7 @@ exports.createcart = (req, res, next) => {
     });
     console.log(cart)
     cart.save()
-      .then(() => res.status(201).json({ alert: 'Objet enregistré !'}))
+      .then(() => res.status(201).json())
       .catch(error => res.status(400).json({ error }));
   };
 
@@ -32,7 +32,7 @@ exports.deleteCart = (req, res, next) => {
       .then(cart => {
             
           cart.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ alert: 'Objet supprimé !'}))
+          .then(() => res.status(200).json({ alert: 'Payement accepté'}))
           .catch(error => res.status(400).json({ error }));
         
       })

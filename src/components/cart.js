@@ -16,7 +16,7 @@ export default function CartCard({ data }) {
   );
 
   
- 
+
  
   return (
     
@@ -36,12 +36,7 @@ export default function CartCard({ data }) {
           <span className="prix">Etat : {data.state}</span>
         </Card.Meta>
 
-        <Button  content='Expédié' primary
-            name="expedie"
-            size="big"
-            
-            style={{ cursor: "pointer" }}
-          />
+        
       </Card.Content>
       
         

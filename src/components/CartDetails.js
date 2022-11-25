@@ -40,7 +40,7 @@ function deleteFromStock(){
   .then(res => {
     console.log(res);
     console.log(res.data);
-    alert ("produit enregistré")
+    alert ("Payement accepté")
   })
 
 

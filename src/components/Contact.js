@@ -1,41 +1,67 @@
 import React, { useState } from "react";
 import { Input, Button, Form, TextArea } from 'semantic-ui-react'
-const FORM_ENDPOINT = "https://public.herotofu.com/v1/6916c380-6808-11ed-bd0a-c1ef0a3c8340";
+import axios from 'axios'
+import { useRef } from 'react';
 
-const ContactForm = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const handleSubmit = () => {
-    setTimeout(() => {
-      setSubmitted(true);
-    }, 100);
-  };
 
-  if (submitted) {
-    return (
-      <>
-        <h2>Merci!</h2>
-        <div>Je vous recontacte rapidement.</div>
-      </>
-    );
+
+
+//***************** */
+  const Send = () => {
+    
+    
+    const nameImput= useRef();
+    const emailImput= useRef();
+    const messageImput= useRef();
+    
+    
+   
+    const submit= (event) =>{
+        event.preventDefault()
+    
+        const name = nameImput.current.value;
+        const email = emailImput.current.value;
+        const message = messageImput.current.value;
+        
+        
+    const contact= {
+     
+      name,
+      email, 
+      message
+     
+     
+      
+    }
+
+    axios.post("http://localhost:8000/api/contact", contact)
+  .then(res => {
+    console.log(res);
+    console.log(res.data);
+    alert ("Message envoyé")
+  })
   }
+
+//***************** */
+  
 
   return (
     <Form>
      
     <form
-      action={"https://public.herotofu.com/v1/6916c380-6808-11ed-bd0a-c1ef0a3c8340"}
-      onSubmit={handleSubmit}
+      action={Send}      
+     
       method="POST"
       target="_blank"
     >
       <div>
-        <Input type="text" placeholder="Nom" name="name" required />
+        <Input type="text" ref={nameImput} placeholder="Nom" name="name" required />
       </div>
       <div>
-        <Input type="email" placeholder="Email" name="email" required />
+        <Input type="email" ref={emailImput} placeholder="Email" name="email" required />
       </div>
       <div>
-        <TextArea placeholder="votre message" name="message" required />
+        <TextArea ref={messageImput} placeholder="votre message" name="message" required />
       </div>
       <div>
         <Button type="submit"> Envoyer </Button>
@@ -46,4 +72,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default Send;

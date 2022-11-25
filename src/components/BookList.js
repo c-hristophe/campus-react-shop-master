@@ -20,7 +20,7 @@ export default function BookList() {
     <>
       
       {books.length === 0 ? (
-        <div>loading...</div>
+        <div>Le magasin est vide ! </div>
       ) : (
         <div>
 

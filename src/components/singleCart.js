@@ -3,47 +3,59 @@ import { useParams,  } from "react-router-dom";
 import { Image, Card, Grid, Button} from "semantic-ui-react";
 import '../styles/home.css';
 import axios from 'axios';
-import { CartContext } from "../App";
-import { useSpring, animated } from "react-spring";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+
 
 
 export default function SingleCart (data) {
-    const { addToCart } = useContext(CartContext);
-    const [anim, setAnim] = useState(false);
-    const props = useSpring({ to: { x: anim ? 0 : 1 } });
-    const [books, setBooks] = useState([]);
-  const { cart, } = useContext(
-    CartContext
-  );
+    
 
+const id= useParams()
+console.log (id.productId)
 
 useEffect(() => {
-    axios.get(`http://localhost:8000/api/articles/${data._id}`)
+    axios.get(`http://localhost:8000/api/cart/`)
     .then(res => {
-      const books = res.data;
-      console.log(books)
-      setBooks(books);
+      const book = res.data;
+      console.log(book)
+     setBooks(book)
     });
+    
+    
   }, []);
+
+  
+  const [book, setBooks] = useState([]);  
+  console.log(book)
+  const product = book.find((book) => book._id === id.productId);  
+ 
+  
+    if (product !== undefined) {
+      const{title, image, price} =product
+ console.log(product)
+
+function deleteFromCart() {
+    axios.delete(`http://localhost:8000/api/cart/${id.productId}`)
+    window.location.reload()
+}
 
   return (
     <div class= "thumbSingle">
-        <Image className='thumbSingle--img' src={data.image}  />
+        <Image className='thumbSingle--img' src={image}  />
         <Card.Content>
           <Card.Meta>
-            {data.title}
+            {title}
             </Card.Meta>
           
-          <Card.Description>Description : {data.description}</Card.Description>
+          <p>Prix : {price}</p>
           
         </Card.Content>
         <Card.Content extra>
           
-            <Button content='Retour' primary
-              name="retour"
+            <Button content='Expédié' primary
+              name="expédié"
               size="big"
-              onClick={() =>  window.history.back()}
+              onClick={deleteFromCart}
               style={{ cursor: "pointer" }}
             />
             </Card.Content>
@@ -53,5 +65,6 @@ useEffect(() => {
       
         
       </div>
-  )
+  )}
+  return null;
 }

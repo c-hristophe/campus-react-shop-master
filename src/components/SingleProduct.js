@@ -32,11 +32,11 @@ useEffect(() => {
   
     if (product !== undefined) {
       const{title, image, price, description} =product
-console.log(title, price, description);
+
 
 
 const isLogged= localStorage.getItem ('isLogged')
-console.log(isLogged)
+
 
 return (
   <div class= "thumbSingle">
