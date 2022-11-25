@@ -35,10 +35,9 @@
     }
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+label {
+  font-size: 18px;
+  margin: 10px
 }
 
 .imput {

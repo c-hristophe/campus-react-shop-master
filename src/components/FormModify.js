@@ -6,26 +6,25 @@ import axios from 'axios';
 import { useRef } from 'react';
 
 
-
-export default function SingleProduct (data) {
+const modifyArticle = () =>{
     
    
-    const priceImput= useRef(priceImput);
-    const titleImput= useRef(titleImput);
-    const descriptionImput= useRef(descriptionImput);
-    const stateImput= useRef(stateImput);
-    const imageImput= useRef(imageImput);
+    const priceImput= useRef();
+    const titleImput= useRef();
+    const descriptionImput= useRef();
+    const stateImput= useRef();
+    const imageImput= useRef();
     
     console.log(titleImput)
    
     const submit= (event) =>{
         event.preventDefault()
     
-        const title = titleImput.value;
-        const price = priceImput;
-        const image = imageImput;
-        const description = descriptionImput;
-        const state = stateImput;
+        const title = titleImput.current.value;
+        const price = priceImput.current.value;
+        const image = imageImput.current.value;
+        const description = descriptionImput.current.value;
+        const state = stateImput.current.value;
         
     const article= {
      
@@ -83,19 +82,22 @@ console.log(article)
             <Form onSubmit={submit} key={books.id} >
             
             <Form.Group unstackable widths={2} >
-            <Form.Input type='texte' defaultValue={books.title} ref={titleImput} label='nom'  name= 'title' required/>
-          
-            <Form.Input  defaultValue={books.price} ref={priceImput} label='Prix'  name= 'price' />
+            <label for="title">nom</label>
+            <input type='texte' defaultValue={books.title} ref={titleImput} label='nom'  name= 'title' required/>
+            <label for="price">prix</label>
+            <input defaultValue={books.price} ref={priceImput} label='Prix'  name= 'price' />
           
             </Form.Group>
             <Form.Group widths={2}>
-            <Form.Input defaultValue={books.description} ref={descriptionImput} label='description' name='description'/>
-            
-            <Form.Input defaultValue={books.image} ref={imageImput} label='image'  name= 'image' />
+            <label for="description">description</label>
+            <input defaultValue={books.description} ref={descriptionImput} label='description' name='description'/>
+            <label for="image">image</label>
+            <input defaultValue={books.image} ref={imageImput} label='image'  name= 'image' />
             
             </Form.Group>
             <Form.Group widths={2}>
-            <Form.Input defaultValue={books.state} ref={stateImput} label='état' name='state'/>
+            <label for="state">état</label>
+            <input defaultValue={books.state} ref={stateImput} label='état' name='state'/>
             
             </Form.Group>
             <div className='formButton'>
@@ -122,4 +124,4 @@ console.log(article)
 )
         }
         
-    
+    export default modifyArticle

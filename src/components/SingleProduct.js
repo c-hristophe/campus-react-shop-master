@@ -31,7 +31,7 @@ useEffect(() => {
 
   
     if (product !== undefined) {
-      const{title, image, price, state, description} =product
+      const{title, image, price, description} =product
 console.log(title, price, description);
 
 

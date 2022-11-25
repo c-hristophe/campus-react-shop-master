@@ -11,6 +11,7 @@ import LoginSummary from './components/LoginSummary'
 import CartDetails from "./components/CartDetails";
 import Cart from "./components/cart";
 import SingleProduct from "./components/SingleProduct"
+import SingleCart from "./components/singleCart"
 import Contact from "./components/Contact";
 import Form from "./components/Form"
 import Signup from "./components/Signup"
@@ -145,6 +146,7 @@ const isLogged = localStorage.getItem('isLogged')
             <Route path="Delete" component={Delete} />
             <Route path="/FormModify" component={FormModify} />
             <Route path="/SingleProduct/:productId" component={SingleProduct} />
+            <Route path="/SingleCart/:productId" component={SingleCart} />
             <Route path="/" component={BookList} />
              
 
