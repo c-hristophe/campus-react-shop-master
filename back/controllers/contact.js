@@ -1,6 +1,6 @@
 const Contact = require('../models/contact');
 
-exports.createContact = (req, res, next) => {
+exports.creatContact = (req, res, next) => {
     const contactObject = req.body;
     
     delete contactObject._id;
@@ -19,4 +19,16 @@ exports.createContact = (req, res, next) => {
     Contact.find()
       .then(contact => res.status(200).json(contact))
       .catch(error => res.status(400).json({ error }));
+  };
+
+  exports.deleteContact = (req, res, next) => {
+    Contact.findOne({_id: req.params.id})
+      .then(cart => {
+            
+          Contact.deleteOne({ _id: req.params.id })
+          .then(() => res.status(200).json({ alert: 'supprimé !'}))
+          .catch(error => res.status(400).json({ error }));
+        
+      })
+      .catch(error => res.status(500).json({ error }));
   };

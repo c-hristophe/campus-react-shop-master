@@ -20,7 +20,9 @@ export default function BookList() {
     <>
       
       {books.length === 0 ? (
-        <div>Le magasin est vide ! </div>
+        <div className="expedition">
+          <h1>Aucun article à la vente en ce moment</h1>
+          </div>
       ) : (
         <div>
 

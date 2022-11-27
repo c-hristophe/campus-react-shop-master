@@ -6,7 +6,7 @@ const userRoutes = require('./routes/user');
 
 const articleRoutes = require('./routes/article');
 const cartRoutes = require('./routes/cart');
-
+const contactRoutes = require('./routes/contact');
 const path = require('path');
 
 
@@ -33,6 +33,7 @@ app.use((req, res, next) => {
 app.use('/api/auth', userRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/contact', contactRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 

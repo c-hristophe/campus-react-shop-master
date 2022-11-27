@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input, Button, Form, TextArea } from 'semantic-ui-react'
 import axios from 'axios'
 import { useRef } from 'react';
-
+import '../styles/home.css'
 
 
 
@@ -30,11 +30,11 @@ import { useRef } from 'react';
       email, 
       message
      
-     
-      
     }
 
-    axios.post("http://localhost:8000/api/contact", contact)
+    console.log(contact)
+
+    axios.post("http://localhost:8000/api/contact/", contact)
   .then(res => {
     console.log(res);
     console.log(res.data);
@@ -46,29 +46,30 @@ import { useRef } from 'react';
   
 
   return (
-    <Form>
+    
      
-    <form
+    <Form
       action={Send}      
-     
+      onSubmit={submit}
       method="POST"
       target="_blank"
-    >
-      <div>
-        <Input type="text" ref={nameImput} placeholder="Nom" name="name" required />
-      </div>
-      <div>
-        <Input type="email" ref={emailImput} placeholder="Email" name="email" required />
-      </div>
-      <div>
-        <TextArea ref={messageImput} placeholder="votre message" name="message" required />
-      </div>
-      <div>
+      >
+     <Form.Group unstackable widths={2} >
+        <label for="title">nom</label>
+        <input  type="text" ref={nameImput} placeholder="Nom" name="name" required/>
+        <label for="title">email</label>
+        <input type="email" ref={emailImput} placeholder="Email" name="email" required />
+      </Form.Group>
+      <Form.Group unstackable widths={1} >
+      <label for="title">message</label>
+        <input ref={messageImput} placeholder="votre message" name="message" required />
+      </Form.Group>
+      <div className="rowContact">
         <Button type="submit"> Envoyer </Button>
       </div>
-    </form>
+    </Form>
    
-   </Form>
+
   );
 };
 

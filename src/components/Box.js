@@ -12,32 +12,20 @@ export default function CartDetails() {
   );
   
 //***********
-function deleteFromStock(){
+function TotalDay(){
 
-   
-    Object.keys(cart).map(key => (
-    
-    axios.delete(`http://localhost:8000/api/articles/${cart[key]._id}`)
-    ))
-    
-  localStorage.removeItem ("react-shop")
-  window.location.reload()  
-
- //prévenir le vendeu de la vente d'un objet 
-
-  var note = {
+  var totalDay = {
      
     
     title: (Object.keys(cart).map(key =>cart[key].title)).toString(),
     price: (Object.keys(cart).map(key =>cart[key].price)).toString(),
-    description: (Object.keys(cart).map(key =>cart[key].description)).toString(),
-    image: (Object.keys(cart).map(key =>cart[key].image)).toString(),
-    state: (Object.keys(cart).map(key =>cart[key].state)).toString(),
+    _id: (Object.keys(cart).map(key =>cart[key]._id)).toString(),
+
   } 
     
-   console.log(note)
+   console.log(totalDay)
 
-  axios.post("http://localhost:8000/api/cart", note)
+  axios.post("http://localhost:8000/api/box", totalDay)
   .then(res => {
     console.log(res);
     console.log(res.data);
@@ -64,6 +52,7 @@ function deleteFromStock(){
             <Table.HeaderCell singleLine textAlign="center">
               Quantité
             </Table.HeaderCell>
+            <Table.HeaderCell>Référence</Table.HeaderCell>
             <Table.HeaderCell>Titre</Table.HeaderCell>
             <Table.HeaderCell textAlign="right">Prix unitaire</Table.HeaderCell>
             <Table.HeaderCell textAlign="right">Prix total</Table.HeaderCell>
@@ -74,14 +63,11 @@ function deleteFromStock(){
           {Object.keys(cart).map(key => (
             <Table.Row key={cart[key].id}>
               <Table.Cell>
-                <Icon
-                  name="minus square outline"
-                  onClick={() => removeFromCart(cart[key])}
-                  style={{ cursor: "pointer" }}
-                />
+                
                 {cart[key].quantity}{" "}
                 
               </Table.Cell>
+              <Table.Cell singleLine>{cart[key]._id}</Table.Cell>
               <Table.Cell singleLine>{cart[key].title}</Table.Cell>
               <Table.Cell textAlign="right">{cart[key].price} €</Table.Cell>
               <Table.Cell textAlign="right">
@@ -98,8 +84,8 @@ function deleteFromStock(){
         Le montant total à régler est de  {countCartArticles().toFixed(2)}  €
       </div>
       <div>
-      <Form onSubmit={deleteFromStock} >
-            <Button type='submit'>Payer</Button>
+      <Form onSubmit={TotalDay} >
+            <Button type='submit'>Valider total journée</Button>
               </Form>
 
       </div>

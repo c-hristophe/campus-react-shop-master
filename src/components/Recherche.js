@@ -2,14 +2,19 @@ import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from "axios";  
-import { Button, Form } from 'semantic-ui-react'
-import { MyLocationRounded } from '@material-ui/icons';
+import { Button, Form, Image, } from 'semantic-ui-react'
+
 
 const App = () => {
   
   const [myOptions, setMyOptions,] = useState([])
+  const [myOptions2, setMyOptions2,] = useState([])
+  const [myOptions3, setMyOptions3,] = useState([])
+  const [myOptions4, setMyOptions4,] = useState([])
+  const [myOptions5, setMyOptions5,] = useState([])
+  const [myOptions6, setMyOptions6,] = useState([])
   const [data, setMyData] = useState([]);
-  const [dataTitle, setMyDataTitle] = useState([]);
+  
 
   const getDataFromAPI = () => {
     
@@ -20,16 +25,38 @@ const App = () => {
       
       for (var i = 0; i < res.data.length; i++) {
         myOptions.push(res.data[i].title)
-       
+        myOptions2.push(res.data[i].price)
+        myOptions3.push(res.data[i].description)
+        myOptions4.push(res.data[i].image)
+        myOptions5.push(res.data[i].state)
+        myOptions6.push(res.data[i]._id)
       }
       setMyOptions(myOptions)
+      setMyOptions2(myOptions2)
+      setMyOptions3(myOptions3)
+      setMyOptions4(myOptions4)
+      setMyOptions5(myOptions5)
+      setMyOptions6(myOptions6)
       const data = res.data;
       setMyData(data);
     })
     
     
   }
+//  *******************
+
+function deleteFromStock(){
+  
+  axios.delete(`http://localhost:8000/api/articles/${myOptions6[indexof]}`)
+
+  alert('Article vendu ! ')
+}
+
+/************************ */
  console.log(data)
+ const [value, setValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState('');
+  const [indexof, setInputValueIndex] = React.useState('');
 
   return (
     
@@ -42,11 +69,16 @@ const App = () => {
         autoComplete
         autoHighlight
         options={myOptions}
-        //***************** */
-        // onInputChange={(event, newInputValue) => {
-        //   setInputValue(newInputValue);
-        // }}
-        //***************** */
+        
+        
+        onInputChange={(event, newInputValue) => {
+          setInputValue(newInputValue);
+          var index= newInputValue
+          var indexof =(myOptions.indexOf(index));
+          setInputValueIndex(indexof);
+          
+        }}
+      
         renderInput={(params) => (
           
           <TextField {...params}
@@ -57,24 +89,22 @@ const App = () => {
      
         )}
       />
+      
       </Form>
 
              <Form>
                 
-            <Form.Group unstackable widths={2} >
-            <Form.Input value={data.title} label='nom'  name= 'title'/>
-            <Form.Input value={data.price} label='Prix'  name= 'price' />
+            <Form.Group  widths={4} >
+              <Form.Input value={` ${myOptions6[indexof]}`} label='référence'  name= 'reference'/>
+              <Form.Input value={` ${myOptions[indexof]}`} label='nom'  name= 'title'/>
+              <Form.Input value={` ${myOptions2[indexof]}`}  label='Prix'  name= 'price' />
+              <Form.Input value={` ${myOptions5[indexof]}`}  label='état' name='state'/>
             </Form.Group>
             <Form.Group widths={2}>
-            <Form.Input value={data.description}  label='description' name='description'/>
-            <Form.Input value={data.image}  label='image'  name= 'image' />
+              <Image className='thumb--img' src={` ${myOptions4[indexof]}`}  />
+              <Form.TextArea value={` ${myOptions3[indexof]}`}  row= '50' label='description' name='description' break-word />
             </Form.Group>
-            <Form.Group widths={2}>
-            <Form.Input value={data.state}  label='état' name='state'/>
-            
-            </Form.Group>
-            
-            <Button type='submit'>Submit</Button>
+            <Button type='submit' onClick={deleteFromStock}>Encaisser</Button>
             </Form>
                     
             

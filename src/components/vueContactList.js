@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Grid, Segment } from "semantic-ui-react";
-import Cart from "./cart";
+import VueContact from "./vueContact";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SingleProduct from "./SingleProduct"
-import '../styles/home.css'
 
-export default function BookList() {
+export default function vueContactList() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/cart")
+    axios.get("http://localhost:8000/api/contact/")
     .then(res => {
       const books = res.data;
       setBooks(books);
     });
   }, []);
-  
+  console.log(books.length)
+  localStorage.setItem('messages', (books.length))
   return (
     <>
       
       {books.length === 0 ? (
         <div className="expedition">
-          <h1>Aucun article à expédier</h1>
+          <h1>Pas de message</h1>
           </div>
       ) : (
         <div>
@@ -32,7 +32,7 @@ export default function BookList() {
             {books.map(b => (
               <Grid.Column key={b._id}>
                
-                   <Cart data={b} />
+                   <VueContact data={b} />
              
                   
                

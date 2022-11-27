@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, useContext, createContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container, Menu, Icon, } from "semantic-ui-react";
 import "./App.css";
@@ -21,8 +21,9 @@ import Login from "./components/Login"
 import Header from "./components/header"
 import Delete from "./components/Delete"
 import FormModify from "./components/FormModify"
+import vueContactList from './components/vueContactList'
 import "./index.css";
-
+import axios from 'axios'
 
 
 export const CartContext = createContext();
@@ -31,6 +32,7 @@ const CART_KEY = "react-shop";
 function App() {
   const [cart, setCart] = useState({});
   const [nbArticles, setNbArticles] = useState(0);
+  
 
  
   useEffect(() => {
@@ -48,22 +50,22 @@ function App() {
 
   function addToCart(item) {
     console.log("item", item);
-    if (!cart[item.id]) {
-      cart[item.id] = item;
-      cart[item.id].quantity = 1;
+    if (!cart[item._id]) {
+      cart[item._id] = item;
+      cart[item._id].quantity = 1;
      
     } else {
-      cart[item.id].quantity += 1;
+      cart[item._id].quantity += 1;
     }
     setCart({ ...cart });
     console.log("cart", cart);
   }
 
   function removeFromCart(item) {
-    if (cart[item.id].quantity !== 1) {
-      cart[item.id].quantity = cart[item.id].quantity - 1;
+    if (cart[item._id].quantity !== 1) {
+      cart[item._id].quantity = cart[item._id].quantity - 1;
     } else {
-      delete cart[item.id];
+      delete cart[item._id];
     }
     setCart({ ...cart });
     console.log("cart", cart);
@@ -93,7 +95,34 @@ function App() {
     removeFromCart,
     emptyCart
   };
+
+
+
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/contact/")
+    .then(res => {
+      const books = res.data;
+      setBooks(books);
+    });
+  }, []);
+
+  const [cde, setCde] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/cart/")
+    .then(res => {
+      const cde = res.data;
+      setCde(cde);
+    });
+  }, []);
+ 
 const isLogged = localStorage.getItem('isLogged')
+var numberOfMessages = books.length
+var numberOfCde = cde.length
+console.log(numberOfMessages)
+
   return (
     <>
       <Router>
@@ -102,12 +131,17 @@ const isLogged = localStorage.getItem('isLogged')
             <Header/>
             <nav className="navMenu">
             <div className='navbar__link'>            
+                <Link to="/vueContactList">
+                  <Icon name="mail" size="big" />{numberOfMessages}
+                </Link>
+                </div>
+            <div className='navbar__link'>            
                 <Link to="/note">
-                  <Icon name="cart" size="small" /> <noteSummary />
+                  <Icon name="cart" size="big" /> {numberOfCde}
                 </Link>
                 </div> 
               <div className='navbar__link'>
-                <Link to="/">My Shop</Link>
+                <Link to="/">Accueil</Link>
               </div>  
               <div className='navbar__link'>            
                 <Link to="/cart">
@@ -141,7 +175,8 @@ const isLogged = localStorage.getItem('isLogged')
             <Route path="/form" component={Form} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <Route path="/contact" component={Contact} />
+            <Route path="/Contact" component={Contact} />
+            <Route path="/vueContactList" component={vueContactList} />
             <Route path="/Recherche" component={Recherche} />
             <Route path="Delete" component={Delete} />
             <Route path="/FormModify" component={FormModify} />

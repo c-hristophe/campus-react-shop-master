@@ -53,7 +53,7 @@ export default function BookCard({ data }) {
           />
           
         </animated.div>
-        <Link to="/contact">Contacter le vendeur
+        <Link to="/Contact">Contacter le vendeur
                    
         </Link>
       </Card.Content>

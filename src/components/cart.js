@@ -8,19 +8,20 @@ import '../styles/home.css'
 import axios from 'axios'
 
 export default function CartCard({ data }) {
-  const { addToCart } = useContext(CartContext);
+    
+ 
   const [anim, setAnim] = useState(false);
   const props = useSpring({ to: { x: anim ? 0 : 1 } });
-  const { cart, } = useContext(
+  const { cart } = useContext(
     CartContext
   );
 
-  
+
 
  
   return (
     
-    <div class= "thumb">
+    <div className= "thumb">
       <Link to={`/singleCart/${data._id}`}>
       <Image className='thumb--img' src={data.image}  />
       </Link>
