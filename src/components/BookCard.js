@@ -10,7 +10,7 @@ export default function BookCard({ data }) {
   const [anim, setAnim] = useState(false);
   const props = useSpring({ to: { x: anim ? 0 : 1 } });
   
-  
+ 
   function handleAddToCart(data) {
     setAnim(!anim);
     addToCart(data);

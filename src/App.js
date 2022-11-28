@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Container, Menu, Icon, } from "semantic-ui-react";
+import { Container, Menu, Icon, Button } from "semantic-ui-react";
 import "./App.css";
 import BookList from "./components/BookList";
 import cartList from "./components/cartList";
@@ -17,13 +17,19 @@ import Form from "./components/Form"
 import Signup from "./components/Signup"
 import RechercheSummary from "./components/RechercheSummary"
 import Recherche from "./components/Recherche"
+import BoxSummary from "./components/BoxSummary"
+import BoxYearSummary from "./components/boxYearSummary"
+import Box  from "./components/Box";
+import boxYear  from "./components/boxYear";
 import Login from "./components/Login"
 import Header from "./components/header"
+
 import Delete from "./components/Delete"
 import FormModify from "./components/FormModify"
 import vueContactList from './components/vueContactList'
 import "./index.css";
 import axios from 'axios'
+import LogOut from "./components/logOut";
 
 
 export const CartContext = createContext();
@@ -45,6 +51,7 @@ function App() {
   useEffect(() => {
  
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    
     document.title = `caddie(${nbArticles.toFixed(2)}€)`;
   }, [cart, nbArticles]);
 
@@ -87,6 +94,10 @@ function App() {
     return total;
   }
 
+  function LogOut () {
+    const logOut= false
+    localStorage.setItem('isLogged', logOut)
+  }
   
   const contextValue = {
     cart,
@@ -118,55 +129,71 @@ function App() {
     });
   }, []);
  
-const isLogged = localStorage.getItem('isLogged')
+
 var numberOfMessages = books.length
 var numberOfCde = cde.length
 console.log(numberOfMessages)
 
+
   return (
     <>
+    
       <Router>
         <CartContext.Provider value={contextValue}>
           <Container>
+            
             <Header/>
+            
             <nav className="navMenu">
-            <div className='navbar__link'>            
+            
+          <div className='navbar__link'>
+                <Link to="/login">
+                   <LoginSummary />
+                </Link>
+                </div> 
+                
+            </nav>
+             <nav className="navMenu">
+                <div className='navbar__link'>            
                 <Link to="/vueContactList">
                   <Icon name="mail" size="big" />{numberOfMessages}
                 </Link>
                 </div>
-            <div className='navbar__link'>            
+                <div className='navbar__link'>            
                 <Link to="/note">
                   <Icon name="cart" size="big" /> {numberOfCde}
                 </Link>
                 </div> 
-              <div className='navbar__link'>
-                <Link to="/">Accueil</Link>
-              </div>  
-              <div className='navbar__link'>            
+                <div className='navbar__link'>
+                  <Link to="/">Accueil</Link>
+                </div>  
+                <div className='navbar__link'>            
                 <Link to="/cart">
                   <Icon name="cart" size="small" /> <CartSummary />
                 </Link>
                 </div> 
-                {isLogged==="true" && <div className='navbar__link'>
+                <div className='navbar__link'>
                 <Link to="/form">
                    <FormSummary />
                 </Link>
-                </div>}
-                
-                <div className='navbar__link'>
-                <Link to="/login">
-                   <LoginSummary />
-                </Link>
                 </div>
+                
                 <div className='navbar__link'>
                 <Link to="/Recherche">
                    <RechercheSummary />
                 </Link>
                 </div>
-
+                <div className='navbar__link'>
+                <Link to="/Box">
+                   <BoxSummary />
+                </Link>
+                </div>
+                <div className='navbar__link'>
+                <Link to="/BoxYear">
+                   <BoxYearSummary />
+                </Link>
+                </div>
                 
-             
             </nav>
           </Container>
           <Switch>
@@ -182,6 +209,8 @@ console.log(numberOfMessages)
             <Route path="/FormModify" component={FormModify} />
             <Route path="/SingleProduct/:productId" component={SingleProduct} />
             <Route path="/SingleCart/:productId" component={SingleCart} />
+            <Route path="/Box" component={Box} />
+            <Route path="/BoxYear" component={boxYear} />
             <Route path="/" component={BookList} />
              
 

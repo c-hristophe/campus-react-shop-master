@@ -66,13 +66,14 @@ console.log(article)
       console.log(productId)
     
         var res = prompt("Êtes-vous sûr de vouloir supprimer la fiche (y/n)?");
-        if(res){
+        if(res==="y"){
             axios.delete(`http://localhost:8000/api/articles/${productId}`)
       .then(res => {
         window.history.back();
         
       });
         }
+        else{ alert("action suppriée")}
     }
    
 

@@ -35,23 +35,14 @@ handleSubmit(event) {
       axios.post("http://localhost:8000/api/auth/login", user)
       
       .then(res => {
-        console.log(res);
-        console.log(res.data);
-        console.log(res.data.userId)
+       
         if(res.data.userId){
-            const isLogged = "true" 
-            localStorage.removeItem ('isLogged')
+            const isLogged = true 
             localStorage.setItem('isLogged', isLogged)
             alert ("Bienvenue")
-            window.location.reload()
             
         }
-        else if (!res.data.userId) {
-            const isLogged = "false" 
-            
-            localStorage.setItem('isLogged', isLogged)
-            alert ("non authorisé")
-        }
+        
         
     event.preventDefault();
     })

@@ -13,6 +13,7 @@ const App = () => {
   const [myOptions4, setMyOptions4,] = useState([])
   const [myOptions5, setMyOptions5,] = useState([])
   const [myOptions6, setMyOptions6,] = useState([])
+  const [myOptions7, setMyOptions7,] = useState([])
   const [data, setMyData] = useState([]);
   
 
@@ -30,6 +31,7 @@ const App = () => {
         myOptions4.push(res.data[i].image)
         myOptions5.push(res.data[i].state)
         myOptions6.push(res.data[i]._id)
+        myOptions7.push(res.data[i]._quantity)
       }
       setMyOptions(myOptions)
       setMyOptions2(myOptions2)
@@ -37,6 +39,7 @@ const App = () => {
       setMyOptions4(myOptions4)
       setMyOptions5(myOptions5)
       setMyOptions6(myOptions6)
+      setMyOptions7(myOptions7)
       const data = res.data;
       setMyData(data);
     })
@@ -47,12 +50,27 @@ const App = () => {
 
 function deleteFromStock(){
   
-  axios.delete(`http://localhost:8000/api/articles/${myOptions6[indexof]}`)
+  // axios.delete(`http://localhost:8000/api/articles/${myOptions6[indexof]}`)
 
-  alert('Article vendu ! ')
+  
+  // ajouter le code pour ajouter article dans la caisse box
+  
+ 
+    const box = {
+      title: myOptions[indexof],
+      price: myOptions2[indexof],
+      id : myOptions6[indexof],
+
+    }
+    console.log(box)
+    axios.post("http://localhost:8000/api/box/", box)
+    
+    alert('Article vendu ! ')
+
+  /************************ */
 }
 
-/************************ */
+
  console.log(data)
  const [value, setValue] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
@@ -95,14 +113,14 @@ function deleteFromStock(){
              <Form>
                 
             <Form.Group  widths={4} >
-              <Form.Input value={` ${myOptions6[indexof]}`} label='référence'  name= 'reference'/>
-              <Form.Input value={` ${myOptions[indexof]}`} label='nom'  name= 'title'/>
-              <Form.Input value={` ${myOptions2[indexof]}`}  label='Prix'  name= 'price' />
-              <Form.Input value={` ${myOptions5[indexof]}`}  label='état' name='state'/>
+              <Form.Input value={` ${myOptions6[indexof]}`} label='référence'  id= 'reference'/>
+              <Form.Input value={` ${myOptions[indexof]}`} label='nom'  id= 'title'/>
+              <Form.Input value={` ${myOptions2[indexof]}`}  label='Prix'  id= 'price' />
+              <Form.Input value={` ${myOptions5[indexof]}`}  label='état' id='state'/>
             </Form.Group>
             <Form.Group widths={2}>
               <Image className='thumb--img' src={` ${myOptions4[indexof]}`}  />
-              <Form.TextArea value={` ${myOptions3[indexof]}`}  row= '50' label='description' name='description' break-word />
+              <Form.TextArea value={` ${myOptions3[indexof]}`}  row= '50' label='description' id='description' break-word />
             </Form.Group>
             <Button type='submit' onClick={deleteFromStock}>Encaisser</Button>
             </Form>
