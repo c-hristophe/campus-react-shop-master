@@ -23,17 +23,23 @@ import Box  from "./components/Box";
 import boxYear  from "./components/boxYear";
 import Login from "./components/Login"
 import Header from "./components/header"
-
+import MenuWeb from "./components/menuWeb"
+import MenuMaster from "./components/menuMaster"
 import Delete from "./components/Delete"
 import FormModify from "./components/FormModify"
 import vueContactList from './components/vueContactList'
 import "./index.css";
 import axios from 'axios'
-import LogOut from "./components/logOut";
+
 
 
 export const CartContext = createContext();
 const CART_KEY = "react-shop";
+
+function logOut (){
+  localStorage.removeItem('isOn')
+  window.location.reload()
+}
 
 function App() {
   const [cart, setCart] = useState({});
@@ -94,10 +100,7 @@ function App() {
     return total;
   }
 
-  function LogOut () {
-    const logOut= false
-    localStorage.setItem('isLogged', logOut)
-  }
+  
   
   const contextValue = {
     cart,
@@ -109,92 +112,22 @@ function App() {
 
 
 
-  const [books, setBooks] = useState([]);
+  
 
-  useEffect(() => {
-    axios.get("http://localhost:8000/api/contact/")
-    .then(res => {
-      const books = res.data;
-      setBooks(books);
-    });
-  }, []);
-
-  const [cde, setCde] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:8000/api/cart/")
-    .then(res => {
-      const cde = res.data;
-      setCde(cde);
-    });
-  }, []);
- 
-
-var numberOfMessages = books.length
-var numberOfCde = cde.length
-console.log(numberOfMessages)
+  
+var isOn = localStorage.getItem('isOn')
 
 
   return (
     <>
-    
       <Router>
         <CartContext.Provider value={contextValue}>
           <Container>
             
             <Header/>
+            <MenuWeb/>
+            {isOn==="1" &&<MenuMaster/>}
             
-            <nav className="navMenu">
-            
-          <div className='navbar__link'>
-                <Link to="/login">
-                   <LoginSummary />
-                </Link>
-                </div> 
-                
-            </nav>
-             <nav className="navMenu">
-                <div className='navbar__link'>            
-                <Link to="/vueContactList">
-                  <Icon name="mail" size="big" />{numberOfMessages}
-                </Link>
-                </div>
-                <div className='navbar__link'>            
-                <Link to="/note">
-                  <Icon name="cart" size="big" /> {numberOfCde}
-                </Link>
-                </div> 
-                <div className='navbar__link'>
-                  <Link to="/">Accueil</Link>
-                </div>  
-                <div className='navbar__link'>            
-                <Link to="/cart">
-                  <Icon name="cart" size="small" /> <CartSummary />
-                </Link>
-                </div> 
-                <div className='navbar__link'>
-                <Link to="/form">
-                   <FormSummary />
-                </Link>
-                </div>
-                
-                <div className='navbar__link'>
-                <Link to="/Recherche">
-                   <RechercheSummary />
-                </Link>
-                </div>
-                <div className='navbar__link'>
-                <Link to="/Box">
-                   <BoxSummary />
-                </Link>
-                </div>
-                <div className='navbar__link'>
-                <Link to="/BoxYear">
-                   <BoxYearSummary />
-                </Link>
-                </div>
-                
-            </nav>
           </Container>
           <Switch>
             <Route path="/cart" component={CartDetails} />

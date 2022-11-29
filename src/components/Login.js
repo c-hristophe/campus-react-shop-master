@@ -37,9 +37,10 @@ handleSubmit(event) {
       .then(res => {
        
         if(res.data.userId){
-            const isLogged = true 
-            localStorage.setItem('isLogged', isLogged)
+            var isOn = "1" 
+            localStorage.setItem('isOn', isOn)
             alert ("Bienvenue")
+            window.location.reload()
             
         }
         

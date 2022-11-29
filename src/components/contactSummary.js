@@ -6,20 +6,21 @@ import axios from "axios";
 import { Container, Menu, Icon, Button } from "semantic-ui-react";
 
 export default function LoginSummary() {
-  const [cde, setCde] = useState([]);
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/cart/")
+    axios.get("http://localhost:8000/api/contact/")
     .then(res => {
-      const cde = res.data;
-      setCde(cde);
+      const books = res.data;
+      setBooks(books);
     });
   }, []);
-  var numberOfCde = cde.length
+
+  var numberOfMessages = books.length
 
   return (
     <>
-      <span><Icon name="cart" size="big" />  ({numberOfCde})</span>
+      <span><Icon name="mail" size="big" />  ({numberOfMessages})</span>
     </>
   );
 }

@@ -35,7 +35,7 @@ useEffect(() => {
 
 
 
-const isLogged= localStorage.getItem ('isLogged')
+const isOn= localStorage.getItem ('isOn')
 
 
 return (
@@ -63,7 +63,7 @@ return (
         
     
       </Card.Content>
-      {isLogged ==='true' && <Link to={`/FormModify/${productId}`}>Modifier
+      {isOn ==='1' && <Link to={`/FormModify/${productId}`}>Modifier
                    
                    </Link>}
     </div>
