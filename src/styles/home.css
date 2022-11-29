@@ -45,6 +45,10 @@ label {
   text-align: center;
 }
 
+.intro {
+  color: white;
+}
+
 .formButton {
   display: flex;
   flex-direction: row;
@@ -85,7 +89,6 @@ label {
   border-radius: 25px;
   justify-content: space-around;
   margin: auto;
-  margin-top: 30px;
   max-width: 80%;
   font-family: "Helvetica Neue", sans-serif;
 }

@@ -8,6 +8,7 @@ const boxRoutes = require('./routes/box');
 const totalDayRoutes = require('./routes/totalDay');
 const cartRoutes = require('./routes/cart');
 const contactRoutes = require('./routes/contact');
+const customerRoutes = require('./routes/customer');
 const path = require('path');
 
 
@@ -37,6 +38,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/box', boxRoutes);
 app.use('/api/totalDay', totalDayRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/customer', customerRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 

@@ -35,14 +35,20 @@ function deleteFromStock(){
     state: (Object.keys(cart).map(key =>cart[key].state)).toString(),
   } 
     
+  var box = {
+    title: (Object.keys(cart).map(key =>cart[key].title)).toString(),
+    price: (Object.keys(cart).map(key =>cart[key].price)).toString(),
+    id : (Object.keys(cart).map(key =>cart[key]._id)).toString(),
+  }
    console.log(note)
-
+  axios.post("http://localhost:8000/api/box/", box)
   axios.post("http://localhost:8000/api/cart", note)
   .then(res => {
     console.log(res);
     console.log(res.data);
     alert ("Payement accepté")
   })
+
 
 }
 

@@ -5,7 +5,7 @@ export default function SignUpSummary() {
   
   return (
     <>
-      <span>Recherche</span>
+      <span>Recherche article</span>
     </>
   );
 }

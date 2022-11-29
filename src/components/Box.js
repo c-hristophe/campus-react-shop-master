@@ -25,7 +25,7 @@ console.log(box)
 
 //***********
 function TotalDay(){
-  var res = prompt("Êtes-vous sûr de vouloir supprimer la fiche (y/n)?");
+  var res = prompt("Êtes-vous sûr de vouloir valider la journée (y/n)?");
         if(res==="y"){
             let date = new Date()
             var totalDay = {

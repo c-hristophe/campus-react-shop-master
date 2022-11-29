@@ -4,21 +4,15 @@ import { Container, Menu, Icon, Button } from "semantic-ui-react";
 import "./App.css";
 import BookList from "./components/BookList";
 import cartList from "./components/cartList";
-import CartSummary from "./components/CartSummary";
-import FormSummary from './components/FormSummary';
-import SignUpSummary from './components/SignUpSummary'
-import LoginSummary from './components/LoginSummary'
 import CartDetails from "./components/CartDetails";
-import Cart from "./components/cart";
 import SingleProduct from "./components/SingleProduct"
 import SingleCart from "./components/singleCart"
 import Contact from "./components/Contact";
+import Customer from './components/customer'
 import Form from "./components/Form"
 import Signup from "./components/Signup"
-import RechercheSummary from "./components/RechercheSummary"
 import Recherche from "./components/Recherche"
-import BoxSummary from "./components/BoxSummary"
-import BoxYearSummary from "./components/boxYearSummary"
+import findCustomer from './components/findCustomer'
 import Box  from "./components/Box";
 import boxYear  from "./components/boxYear";
 import Login from "./components/Login"
@@ -28,8 +22,9 @@ import MenuMaster from "./components/menuMaster"
 import Delete from "./components/Delete"
 import FormModify from "./components/FormModify"
 import vueContactList from './components/vueContactList'
+import Index from './components/index'
 import "./index.css";
-import axios from 'axios'
+
 
 
 
@@ -127,7 +122,7 @@ var isOn = localStorage.getItem('isOn')
             <Header/>
             <MenuWeb/>
             {isOn==="1" &&<MenuMaster/>}
-            
+            {isOn==="0" &&<Index/>}
           </Container>
           <Switch>
             <Route path="/cart" component={CartDetails} />
@@ -136,8 +131,10 @@ var isOn = localStorage.getItem('isOn')
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/Contact" component={Contact} />
+            <Route path="/Customer" component={Customer} />  
             <Route path="/vueContactList" component={vueContactList} />
             <Route path="/Recherche" component={Recherche} />
+            <Route path="/findCustomer" component={findCustomer} />
             <Route path="Delete" component={Delete} />
             <Route path="/FormModify" component={FormModify} />
             <Route path="/SingleProduct/:productId" component={SingleProduct} />

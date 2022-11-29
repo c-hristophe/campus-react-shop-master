@@ -3,11 +3,13 @@ import { Menu, Icon } from 'semantic-ui-react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import FormSummary from './FormSummary'
 import RechercheSummary from './RechercheSummary'
+import FindCustomerSummary from "./findCustomerSummary";
 import NoteSummary from './noteSummary'
 import ContactSummary from './contactSummary'
 import BoxSummary from './BoxSummary'
 import BoxYearSummary from './boxYearSummary'
 import LogOutSummary from './logOutSummary'
+import CustomerSummary from './CustomerSummary'
 
 export default class MenuExampleBasic extends Component {
   state = {};
@@ -62,6 +64,26 @@ export default class MenuExampleBasic extends Component {
         >
          <Link to="/Recherche">
                    <RechercheSummary />
+                </Link>
+        </Menu.Item>
+
+        <Menu.Item
+          name='upcomingEvents'
+          active={activeItem === 'upcomingEvents'}
+          onClick={this.handleItemClick}
+        >
+         <Link to="/findCustomer">
+                   <FindCustomerSummary />
+                </Link>
+        </Menu.Item>
+
+        <Menu.Item
+          name='upcomingEvents'
+          active={activeItem === 'upcomingEvents'}
+          onClick={this.handleItemClick}
+        >
+         <Link to="/Customer">
+                   <CustomerSummary />
                 </Link>
         </Menu.Item>
 
