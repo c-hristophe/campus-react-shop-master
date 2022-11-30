@@ -12,22 +12,26 @@ const App = () => {
   const [myOptions3, setMyOptions3,] = useState([])
   const [myOptions4, setMyOptions4,] = useState([])
   const [myOptions5, setMyOptions5,] = useState([])
+  const [myOptions6, setMyOptions6,] = useState([])
+  const [myOptions7, setMyOptions7,] = useState([])
   const [data, setMyData] = useState([]);
   
 
   const getDataFromAPI = () => {
     
   
-    axios.get("http://localhost:8000/api/customer")
+    axios.get("http://localhost:8000/api/address")
     
     .then((res) => {
       
       for (var i = 0; i < res.data.length; i++) {
         myOptions.push(res.data[i].name)
         myOptions2.push(res.data[i].email)
-        myOptions3.push(res.data[i].comment)
-        myOptions4.push(res.data[i].article)
-        myOptions5.push(res.data[i]._id)
+        myOptions3.push(res.data[i].address)
+        myOptions4.push(res.data[i].town)
+        myOptions5.push(res.data[i].phone)
+        myOptions6.push(res.data[i].article)
+        myOptions7.push(res.data[i]._id)
         
       }
       setMyOptions(myOptions)
@@ -35,6 +39,8 @@ const App = () => {
       setMyOptions3(myOptions3)
       setMyOptions4(myOptions4)
       setMyOptions5(myOptions5)
+      setMyOptions6(myOptions6)
+      setMyOptions7(myOptions7)
       
       const data = res.data;
       setMyData(data);
@@ -51,23 +57,25 @@ const submit= (event) =>{
     event.preventDefault()
 
     
-    var article = (myOptions4[indexof]).push(articleImput.current.value);
+    var article = myOptions6[indexof].push(articleImput.current.value);
     
     console.log (articleImput.current.value)
-    console.log (myOptions4[indexof])
+    console.log (myOptions6[indexof])
     console.log (article)
 
 const customer= {
  
   name: myOptions[indexof],
   email : myOptions2[indexof],
-  description: myOptions3[indexof],
-  article : myOptions4[indexof],
+  address: myOptions3[indexof],
+  town : myOptions4[indexof],
+  phone: myOptions5[indexof],
+  article : myOptions6[indexof] ,
 
 }
 
 
-axios.put(`http://localhost:8000/api/customer/${myOptions5[indexof]}`, customer)
+axios.put(`http://localhost:8000/api/address/${myOptions7[indexof]}`, customer)
   .then(res => {
     console.log(res);
     console.log(res.data);
@@ -123,12 +131,15 @@ const [options, setOptions,] = useState([])
               
               <Form.Input value={` ${myOptions[indexof]}`} label='nom'  id= 'title'/>
               <Form.Input value={` ${myOptions2[indexof]}`}  label='email'  id= 'email' />
+              <Form.Input value={` ${myOptions3[indexof]}`}  label='adresse' id='address' />
+              <Form.Input value={` ${myOptions4[indexof]}`}  label='ville'  id= 'town' />
+              <Form.Input value={` ${myOptions5[indexof]}`}  label='téléphone'  id= 'phone' />
              
             </Form.Group>
-            <Form.Group widths={2}>
+            <Form.Group widths={3}>
             
-              <Form.TextArea value={` ${myOptions3[indexof]}`}  row= '50' label='commentaire' id='commentaire' break-word />
-              <Form.TextArea value={` ${myOptions4[indexof]}`}  row= '50' label='articles déja achetés' id='articles' break-word />
+              
+              <Form.TextArea value={` ${myOptions6[indexof]}`}  row= '50' label='articles déja achetés' id='articles' break-word />
               <input  label='description' ref={articleImput} placeHolder = 'entrer article' name= 'article' />
             </Form.Group>
             

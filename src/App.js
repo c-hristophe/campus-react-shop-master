@@ -23,6 +23,8 @@ import Delete from "./components/Delete"
 import FormModify from "./components/FormModify"
 import vueContactList from './components/vueContactList'
 import Index from './components/index'
+import address from './components/address'
+
 import "./index.css";
 
 
@@ -122,7 +124,7 @@ var isOn = localStorage.getItem('isOn')
             <Header/>
             <MenuWeb/>
             {isOn==="1" &&<MenuMaster/>}
-            {isOn==="0" &&<Index/>}
+            {isOn===null &&<Index/>}
           </Container>
           <Switch>
             <Route path="/cart" component={CartDetails} />
@@ -141,6 +143,8 @@ var isOn = localStorage.getItem('isOn')
             <Route path="/SingleCart/:productId" component={SingleCart} />
             <Route path="/Box" component={Box} />
             <Route path="/BoxYear" component={boxYear} />
+            <Route path="/address" component={address} />
+            
             <Route path="/" component={BookList} />
              
 

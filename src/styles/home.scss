@@ -14,8 +14,11 @@
 .thumbSingle {
   display: flex;
   justify-content: space-between;
-  
-  width: 90%;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 30px;
+  object-fit: contain;
+  width: 40%;
   height: auto;
   position: relative;
   border: solid black 1px;
@@ -23,7 +26,7 @@
   padding-top: auto;
   overflow: hidden;
   text-align: center;
-  bottom: 0;
+  bottom: 10px;
   background-color: white;
     &--img {
       
@@ -45,6 +48,19 @@ label {
   height: 40px;
  
   margin-top: 10px;
+}
+
+.table {
+  background: white;
+  table-layout: fixed;
+  width: 80%;
+  border-collapse: collapse;
+  border: 3px solid purple;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+  padding: 20px;
 }
 
 .expedition {
@@ -93,6 +109,7 @@ label {
   border-radius: 25px;
   justify-content: space-around;
   margin: auto;
+  margin-top: 30px;
   max-width: 80%;
   font-family: "Helvetica Neue", sans-serif;
 }
@@ -128,5 +145,9 @@ label {
   .card {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .thumbSingle {
+    width: 95%
   }
 }/*# sourceMappingURL=Home.css.map */

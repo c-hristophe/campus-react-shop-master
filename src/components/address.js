@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input, Button, Form, TextArea } from 'semantic-ui-react'
 import axios from 'axios'
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import '../styles/home.css'
 
 
@@ -28,7 +28,10 @@ import '../styles/home.css'
         const town = townImput.current.value;
         const phone = phoneImput.current.value;
         const article = articleImput.current.value;
-        
+    
+
+       
+
     const contact= {
      
       name,

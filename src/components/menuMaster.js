@@ -104,7 +104,7 @@ export default class MenuExampleBasic extends Component {
         >
          <Link to="/BoxYear">
                    <BoxYearSummary />
-                </Link>
+        </Link>
         </Menu.Item>
 
         <Menu.Item

@@ -1,13 +1,13 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Table, Icon, Button, Form } from "semantic-ui-react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { CartContext } from "../App";
 import '../styles/home.css'
 import axios from 'axios';
-
+import { DownloadTableExcel } from 'react-export-table-to-excel';
 
 export default function CartDetails() {
-  
+const tableRef = useRef(null); 
   
 //***********
 const [totalDay, setTotalDay] = useState([]);
@@ -42,7 +42,7 @@ function total() {
     <>
       
 
-      <Table celled padded>
+      <table className="table" ref={tableRef}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Date</Table.HeaderCell>
@@ -62,11 +62,19 @@ function total() {
           ))}
           
         </Table.Body>
-      </Table>
+      </table>
       <div className="totalPrix">
         Le total de l'année s'élève à  {total()}  €
       </div>
-      
+      <DownloadTableExcel
+                    filename="users table"
+                    sheet="users"
+                    currentTableRef={tableRef.current}
+                >
+
+                   <button> Export excel </button>
+
+      </DownloadTableExcel>
       
       
     </>

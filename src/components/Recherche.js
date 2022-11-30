@@ -50,10 +50,10 @@ const App = () => {
 
 function deleteFromStock(){
   
-  // axios.delete(`http://localhost:8000/api/articles/${myOptions6[indexof]}`)
+  axios.delete(`http://localhost:8000/api/articles/${myOptions6[indexof]}`)
 
   
-  // ajouter le code pour ajouter article dans la caisse box
+  // code pour ajouter article dans la caisse box
   
  
     const box = {
@@ -66,6 +66,8 @@ function deleteFromStock(){
     axios.post("http://localhost:8000/api/box/", box)
     
     alert('Article vendu ! ')
+
+    
 
   /************************ */
 }
