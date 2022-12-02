@@ -1,9 +1,7 @@
 import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
+
 import '../styles/home.css'
-import{ useState } from "react";
-import axios from 'axios';
-import { LocalDiningOutlined } from '@material-ui/icons';
+
 
 
 class index extends React.Component {

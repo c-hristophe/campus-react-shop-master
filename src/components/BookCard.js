@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useSpring, animated } from "react-spring";
-import { Card, Image, Icon, Button } from "semantic-ui-react";
+import { Card, Image, Button } from "semantic-ui-react";
 import { CartContext } from "../App";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as  Link } from "react-router-dom";
 import '../styles/home.css'
 
 export default function BookCard({ data }) {

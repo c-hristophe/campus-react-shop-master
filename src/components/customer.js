@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Input, Button, Form, TextArea } from 'semantic-ui-react'
+import React from "react";
+import { Button, Form,  } from 'semantic-ui-react'
 import axios from 'axios'
 import { useRef } from 'react';
 import '../styles/home.css'
@@ -69,12 +69,6 @@ if (find!== '1'){
     });
      
 
-  
-
-//***************** */        
-
-
-   
 
   }
 

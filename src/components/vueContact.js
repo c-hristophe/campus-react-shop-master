@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { Card, Image, Icon, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Card,  Button } from "semantic-ui-react";
 import '../styles/home.css'
 import axios from 'axios'
 

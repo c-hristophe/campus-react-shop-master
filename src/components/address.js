@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Input, Button, Form, TextArea } from 'semantic-ui-react'
+import React from "react";
+import { Button, Form, } from 'semantic-ui-react'
 import axios from 'axios'
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import '../styles/home.css'
 
 

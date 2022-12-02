@@ -1,9 +1,9 @@
 
-import { CartCard } from "../App";
-import React, { useContext, useState, useEffect } from "react";
-import { CartContext } from "../App";
+
+import React, {  useState, useEffect } from "react";
+
 import axios from "axios";
-import { Container, Menu, Icon, Button } from "semantic-ui-react";
+import { Icon,  } from "semantic-ui-react";
 
 export default function LoginSummary() {
   const [cde, setCde] = useState([]);

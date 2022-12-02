@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Icon, Image } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
 import '../styles/home.css'
 
 const HeaderExampleUsersIcon = () => (

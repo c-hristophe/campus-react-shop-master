@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Grid, Segment } from "semantic-ui-react";
+import { Grid,} from "semantic-ui-react";
 import Cart from "./cart";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import SingleProduct from "./SingleProduct"
+
+
 import '../styles/home.css'
 
 export default function BookList() {

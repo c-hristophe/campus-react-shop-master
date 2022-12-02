@@ -1,7 +1,5 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
-import { Table, Icon, Button, Form } from "semantic-ui-react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { CartContext } from "../App";
+import React, {  useState, useEffect, useRef } from "react";
+import { Table, Button, Form } from "semantic-ui-react";
 import { DownloadTableExcel } from 'react-export-table-to-excel';
 import '../styles/home.css'
 import axios from 'axios';
@@ -12,7 +10,7 @@ export default function CartDetails() {
   const tableRef = useRef(null);
 //***********
 const [box, setBox] = useState([]);
-const [total1, setTotal] = useState(0);
+
 useEffect(() => {
   axios.get("http://localhost:8000/api/box")
   .then(res => {

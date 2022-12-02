@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, createContext, useEffect } from "react";
+import React, { useContext, useRef, } from "react";
 import { Table, Icon, Button, Form } from "semantic-ui-react";
 import { CartContext } from "../App";
 import '../styles/home.css';
@@ -8,7 +8,7 @@ import axios from 'axios';
 
 
 export default function CartDetails() {
-  const { cart, addToCart, removeFromCart, emptyCart, countCartArticles } = useContext(
+  const { cart, removeFromCart, emptyCart, countCartArticles } = useContext(
     CartContext
   );
   const nameImput= useRef();

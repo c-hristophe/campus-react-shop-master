@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from "axios";  
-import { Button, Form, Image, } from 'semantic-ui-react'
+import { Button, Form,  } from 'semantic-ui-react'
 
 
 const App = () => {
