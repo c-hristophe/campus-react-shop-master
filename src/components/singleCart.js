@@ -47,7 +47,7 @@ function deleteFromCart() {
             {title}
             </Card.Meta>
           
-          <p>Prix : {price}</p>
+          <p>Prix : {price} €</p>
           
         </Card.Content>
         <Card.Content extra>

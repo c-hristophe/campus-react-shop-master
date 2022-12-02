@@ -12,7 +12,7 @@ exports.getAllBox = (req, res, next) => {
 //création box
 exports.createBox = (req, res, next) => {
     const boxObject = req.body;
-    console.log (boxObject)
+    
     delete boxObject._id;
   
     const box = new Box({
@@ -26,16 +26,9 @@ exports.createBox = (req, res, next) => {
   };
 
 
-// Suppression d'un article de box
+// Suppression de box
 exports.deleteBox = (req, res, next) => {
-    Box.findOne({_id: req.params.id})
-      .then(box => {
-            
-          box.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ alert: 'ligne supprimée'}))
-          .catch(error => res.status(400).json({ error }));
-        
-      })
-      .catch(error => res.status(500).json({ error }));
+    Box.collection.drop()
+    
   };
   

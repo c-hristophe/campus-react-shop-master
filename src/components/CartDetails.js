@@ -1,10 +1,10 @@
 import React, { useState, useContext, useRef, createContext, useEffect } from "react";
 import { Table, Icon, Button, Form } from "semantic-ui-react";
 import { CartContext } from "../App";
-import '../styles/home.css'
+import '../styles/home.css';
 import axios from 'axios';
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+
 
 
 export default function CartDetails() {
@@ -16,10 +16,7 @@ export default function CartDetails() {
   const addressImput= useRef();
   const townImput= useRef();
   const phoneImput = useRef();
-//********************** */
- 
 
-//********************** */
 
 const submit= (event) =>{
     event.preventDefault()
@@ -30,64 +27,130 @@ const submit= (event) =>{
     const town = townImput.current.value;
     const phone = phoneImput.current.value;
     const article = (Object.keys(cart).map(key =>cart[key].title)).toString()
-    console.log(article)
-
-const contact= {
- 
-  name,
-  email, 
-  address,
-  town,
-  phone,
-  article
- 
-}
-
-console.log(contact)
-
-axios.post("http://localhost:8000/api/address/", contact)
-.then(res => {
-console.log(res);
-console.log(res.data);
-alert ("Coodonnées envoyé")
-})
-
-
-
-Object.keys(cart).map(key => (
     
-  axios.delete(`http://localhost:8000/api/articles/${cart[key]._id}`)
-  ))
-  
-localStorage.removeItem ("react-shop")
-window.location.reload()  
 
-//prévenir le vendeu de la vente d'un objet 
-
-var note = {
-   
-  
-  title: (Object.keys(cart).map(key =>cart[key].title)).toString(),
-  price: (Object.keys(cart).map(key =>cart[key].price)).toString(),
-  description: (Object.keys(cart).map(key =>cart[key].description)).toString(),
-  image: (Object.keys(cart).map(key =>cart[key].image)).toString(),
-  state: (Object.keys(cart).map(key =>cart[key].state)).toString(),
-} 
-  
-var box = {
-  title: (Object.keys(cart).map(key =>cart[key].title)).toString(),
-  price: (Object.keys(cart).map(key =>cart[key].price)).toString(),
-  id : (Object.keys(cart).map(key =>cart[key]._id)).toString(),
+    axios.get("http://localhost:8000/api/address/")
+    .then(res => {
+      const books = res.data;
+     let findName =((Object.keys(books).map(key =>books[key].name)))
+    
+    for(var i=0; i<findName.length; i++) {
+    if(nameImput.current.value === findName[i]) {
+     
+       
+       var find='1'
+     
+    }
+     
 }
- console.log(note)
-axios.post("http://localhost:8000/api/box/", box)
-axios.post("http://localhost:8000/api/cart", note)
-.then(res => {
-  console.log(res);
-  console.log(res.data);
-  alert ("Payement accepté")
-})
+      if (find==='1') {
+      var article = (Object.keys(books).map(key =>books[key].article)).concat (Object.keys(cart).map(key =>cart[key].title))
+        const contact= {
+              
+          name,
+          email, 
+          address,
+          town,
+          phone,
+          article : article
+          
+          }
 
+          console.log(article)
+
+          axios.put(`http://localhost:8000/api/address/${(Object.keys(books).map(key =>books[key]._id))}`, contact)
+      .then(res => {
+          console.log(res);
+          console.log(res.data);
+          alert ("Merci pour votre achat, il sera préparé et envoyé dans les meilleurs délais")
+      })    
+
+
+        //**************** */
+        Object.keys(cart).map(key => (
+
+          axios.delete(`http://localhost:8000/api/articles/${cart[key]._id}`)
+          ))
+          
+        localStorage.removeItem ("react-shop")
+        window.location.reload()  
+        
+        //prévenir le vendeu de la vente d'un objet 
+        
+        var note = {
+          
+          
+          title: (Object.keys(cart).map(key =>cart[key].title)).toString(),
+          price: (Object.keys(cart).map(key =>cart[key].price)).toString(),
+          name,
+          address,
+          town,
+          phone,
+          email,
+          image: (Object.keys(cart).map(key =>cart[key].image)).toString(),
+          
+        } 
+          
+        var box = {
+          title: (Object.keys(cart).map(key =>cart[key].title)).toString(),
+          price: (Object.keys(cart).map(key =>cart[key].price)).toString(),
+          id : (Object.keys(cart).map(key =>cart[key]._id)).toString(),
+        }
+
+        console.log(note)
+        axios.post("http://localhost:8000/api/box/", box)
+        axios.post("http://localhost:8000/api/cart", note)
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+          alert ("Payement accepté")
+        })
+      }
+
+      if (find!== '1'){
+      const contact= {
+              
+              name,
+              email, 
+              address,
+              town,
+              phone,
+              article
+              
+              }
+
+              console.log(contact)
+
+              axios.post("http://localhost:8000/api/address/", contact)
+               .then(res => {
+                console.log(res);
+                console.log(res.data);
+                alert ("Coodonnées envoyées")
+          })   
+          
+        
+      Object.keys(cart).map(key => (
+          
+        axios.delete(`http://localhost:8000/api/articles/${cart[key]._id}`)
+        ))
+        
+      localStorage.removeItem ("react-shop")
+      window.location.reload()  
+
+      //prévenir le vendeu de la vente d'un objet 
+
+
+      axios.post("http://localhost:8000/api/box/", box)
+      axios.post("http://localhost:8000/api/cart", note)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        alert ("Payement accepté")
+      }) 
+
+      }
+          });
+          
 }
 
 localStorage.setItem('payment', countCartArticles().toFixed(2)) 
@@ -171,9 +234,9 @@ localStorage.setItem('payment', countCartArticles().toFixed(2))
 
       <div className="rowContact">
       
-        <Button type="submit"> S'identifier </Button>
+        <Button type="submit"> Valider et Payer </Button>
         
-        
+       
       </div>
     </Form>
 

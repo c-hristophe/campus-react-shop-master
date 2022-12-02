@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input, Button, Form, TextArea } from 'semantic-ui-react'
 import axios from 'axios'
 import { useRef } from 'react';
@@ -6,7 +6,6 @@ import '../styles/home.css'
 
 
 
-//***************** */
   const Send = () => {
     
     
@@ -17,8 +16,7 @@ import '../styles/home.css'
     const phoneImput = useRef();
     const articleImput = useRef();
     
-    
-   
+
     const submit= (event) =>{
         event.preventDefault()
     
@@ -28,30 +26,59 @@ import '../styles/home.css'
         const town = townImput.current.value;
         const phone = phoneImput.current.value;
         const article = articleImput.current.value;
+      
+//***************** */
+
+ 
+    axios.get("http://localhost:8000/api/address/")
+    .then(res => {
+      const books = res.data;
+     let findName =((Object.keys(books).map(key =>books[key].name)))
+    console.log (findName)
+    for(var i=0; i<findName.length; i++) {
+    if(nameImput.current.value === findName[i]) {
+     
+        alert ('client existant')
+       var find='1'
         
-    const contact= {
-     
-      name,
-      email, 
-      address,
-      town,
-      phone,
-      article
-     
     }
+     
+}
 
-    console.log(contact)
+if (find!== '1'){
+ const contact= {
+        
+        name,
+        email, 
+        address,
+        town,
+        phone,
+        article
+        
+        }
 
-    axios.post("http://localhost:8000/api/address/", contact)
-  .then(res => {
-    console.log(res);
-    console.log(res.data);
-    alert ("Coodonnées envoyé")
-  })
+        console.log(contact)
+
+        axios.post("http://localhost:8000/api/address/", contact)
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+        alert ("Coodonnées envoyé")
+    })    
+}
+    });
+     
+
+  
+
+//***************** */        
+
+
+   
 
   }
 
-//***************** */
+
   
 
   return (

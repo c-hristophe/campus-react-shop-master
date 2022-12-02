@@ -38,6 +38,7 @@ function TotalDay(){
                       
       .then(res => {
         alert ("journée validée")
+        axios.delete("http://localhost:8000/api/box/")
         
       });
         }
