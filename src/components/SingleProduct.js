@@ -3,13 +3,14 @@ import { useParams,  } from "react-router-dom";
 import { Image, Card, Button} from "semantic-ui-react";
 import '../styles/home.css';
 import axios from 'axios';
-
-import { BrowserRouter as Link } from "react-router-dom";
+import { CartContext } from "../App";
+import { useSpring,  } from "react-spring";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function SingleProduct (data) {
-  
- 
- 
+  const { addToCart } = useContext(CartContext);
+  const [anim, setAnim] = useState(false);
+  const props = useSpring({ to: { x: anim ? 0 : 1 } });
   
 
 
@@ -30,7 +31,7 @@ useEffect(() => {
 
   
     if (product !== undefined) {
-      const{title, image, description} =product
+      const{title, image, price, description} =product
 
 
 

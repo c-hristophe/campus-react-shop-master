@@ -45,9 +45,9 @@ function deleteFromCart() {
   window.location.reload()
 
 }
-for (let i=0; i<books.length; i++){
+
 console.log (title[i])
-}
+
  return (
     
     <div className= "thumb">
