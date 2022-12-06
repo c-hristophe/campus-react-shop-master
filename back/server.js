@@ -1,6 +1,47 @@
 // Création du serveur
 const http = require('http');
 const app = require('./app');
+require("dotenv").config();
+
+//********************** */
+//stripe
+
+const bodyParser = require("body-parser");
+const jsonParser = bodyParser.json();
+
+const stripe = require("stripe")(process.env.SECRET_KEY);
+const cors = require ('cors')
+const express = require("express");
+
+app.use(bodyParser.urlencoded({extender: true}))
+app.use (bodyParser.json());
+app.use(cors());
+
+app.post("/stripe", cors( async (req,res)=>{
+  let {amount, id} =req.body;
+  console.log("amount, id",amount, id)
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount : amount,
+      currency: "EUR",
+      description: "company",
+      payment_methode : id,
+      confirm : true,
+    });
+    res.json({
+      message: "paiement réussi",
+      success: true,
+    })
+  }catch (error){
+  console.log(error);
+    res.json({
+      message: "le paiement a échoué",
+      success: false,
+  })
+}
+}))
+
+//***************** */
 
 // Renvoie d'un port valide
 const normalizePort = val => {

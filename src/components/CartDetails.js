@@ -1,13 +1,16 @@
-import React, { useContext, useRef, } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 import { Table, Icon, Button, Form } from "semantic-ui-react";
 import { CartContext } from "../App";
 import '../styles/home.css';
 import axios from 'axios';
 
+import StripeContainer from './StripeContainer'
+
 
 
 
 export default function CartDetails() {
+
   const { cart, removeFromCart, emptyCart, countCartArticles } = useContext(
     CartContext
   );
@@ -151,6 +154,10 @@ const submit= (event) =>{
       }
           });
           
+////////////////////////////////////////::
+
+/////////////////////////////////////////////////////////////////
+
 }
 
 localStorage.setItem('payment', countCartArticles().toFixed(2)) 
@@ -230,17 +237,42 @@ localStorage.setItem('payment', countCartArticles().toFixed(2))
         <input type="text" ref={phoneImput} placeholder="Téléphone" name="phone" required />
       </Form.Group>
 
-      
+
+
+    
 
       <div className="rowContact">
       
-        <Button type="submit"> Valider et Payer </Button>
-        
+
+          <Button type="submit"> 
+        Valider et Payer 
+        </Button>
        
-      </div>
-    </Form>
+
+        <div id="smart-button-container">
+          <div >
+            <div id="paypal-button-container"></div>
+          </div>
+        </div>
+
+
 
       </div>
+    </Form>
+<StripeContainer/>
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+  
 
     </>
   );

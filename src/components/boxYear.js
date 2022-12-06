@@ -64,7 +64,7 @@ function total() {
         </Table.Body>
       </table>
       <div className="totalPrix">
-        Le total de l'année s'élève à  {total()}  €
+        Le total de l'année s'élève à  {total().toFixed(2)}  €
       </div>
       <DownloadTableExcel
                     filename="users table"

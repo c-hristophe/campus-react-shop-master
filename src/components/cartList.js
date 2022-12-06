@@ -17,8 +17,8 @@ export default function BookList() {
     });
   }, []);
   
-
-
+console.log(books)
+  
   return (
     <>
       
@@ -29,21 +29,14 @@ export default function BookList() {
       ) : (
         <div>
 
-<div className="card">
+        <div className="card-cart">
     
-            {books.map(b => (
-              <Grid.Column key={b._id}>
-               
-                   <Cart data={b} />
-             
-                  
-               
-              </Grid.Column>
-            ))}
+            <Cart/>
          
           </div>
         </div>
       )}
     </>
   );
+
 }

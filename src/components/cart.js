@@ -1,17 +1,14 @@
 import React from 'react'
 import  {  useState, useEffect } from "react";
-import { Card, Image,  Button } from "semantic-ui-react";
+import { Card, Image, Button } from "semantic-ui-react";
 import '../styles/home.css'
 import axios from 'axios'
-
 
 
 
 export default function CartCard() {
   const [books, setBooks] = useState([]);  
 
-
-  
   useEffect(() => {
     axios.get("http://localhost:8000/api/cart")
     .then(res => {
@@ -19,56 +16,44 @@ export default function CartCard() {
       setBooks(books);
     });
   }, []);
-
-  console.log (books)
-
   
-
-
-for (let i=0; i<books.length; i++){
-
- const id = Object.keys(books).map(key => (books[key]._id))
- const  title = Object.keys(books).map(key => (books[key].title))
- const  image= Object.keys(books).map(key => (books[key].image))
- const  price= Object.keys(books).map(key => (books[key].price))
- const  name = Object.keys(books).map(key => (books[key].name))
- const  address= Object.keys(books).map(key => (books[key].address))
- const  town= Object.keys(books).map(key => (books[key].town))
- const  email= Object.keys(books).map(key => (books[key].email))
- const  phone= Object.keys(books).map(key => (books[key].phone))
  
-
-
-function deleteFromCart() {
-  
-  axios.delete(`http://localhost:8000/api/cart/${id[i]}`)
-  window.location.reload()
-
+console.log (Object.keys(books).map(key => (books[key].title)))
+for(let i=0; i<books.length; i++ ) {
+  console.log(books[i].title)
 }
 
-console.log (title[i])
+for(let i=0; i<books.length; i++ ) {
 
- return (
+function deleteFromCart() {
+  axios.delete(`http://localhost:8000/api/cart/${Object.keys(books).map(key => (books[key]._id))[i]}`)
+  window.location.reload()
+}
+
+
+
+  console.log(books[i].title)
+ 
+  return (
     
     <div className= "thumb">
       
-      <Image className='thumb--img' src={image[i]}  />
+      <Image className='thumb--img' src={books[i].image}  />
 
       <Card.Content>
-        
         <Card.Meta>
-          {title[i]}
+      {books[i].title}
           </Card.Meta>
         <Card.Meta>
-          <span className="prix">Prix {price[i]} €</span>
+          <span className="prix">Prix {books[i].price} €</span>
         </Card.Meta>
             
         <Card.Meta>
-          <p className="prix">Acheteur: {name[i]}</p>
-          <p className="prix">Adresse: {address[i]}</p>
-          <p className="prix">Ville: {town[i]}</p>
-          <p className="prix">Mail: {email[i]}</p>
-          <p className="prix">Téléphone: {phone[i]}</p>
+          <p className="prix">Acheteur: {books[i].name}</p>
+          <p className="prix">Adresse: {books[i].address}</p>
+          <p className="prix">Ville: {books[i].town}</p>
+          <p className="prix">Mail: {books[i].email}</p>
+          <p className="prix">Téléphone: {books[i].phone}</p>
         </Card.Meta>
 
         <Button content='Expédié' primary
@@ -80,8 +65,11 @@ console.log (title[i])
 
       </Card.Content>
       
+        
+      
+     
     </div>
     
-  )}
-  return null;
+  )};
+  return null
 }
