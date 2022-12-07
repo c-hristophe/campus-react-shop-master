@@ -75,7 +75,7 @@ const submit= (event) =>{
           axios.delete(`http://localhost:8000/api/articles/${cart[key]._id}`)
           ))
           
-        localStorage.removeItem ("react-shop")
+      
         window.location.reload()  
         
         //prévenir le vendeu de la vente d'un objet 
@@ -106,7 +106,7 @@ const submit= (event) =>{
         .then(res => {
           console.log(res);
           console.log(res.data);
-          alert ("Payement accepté")
+          alert ("Coordonnées enregistrées")
         })
       }
 
@@ -118,7 +118,7 @@ const submit= (event) =>{
               address,
               town,
               phone,
-              article
+              article,
               
               }
 
@@ -137,7 +137,7 @@ const submit= (event) =>{
         axios.delete(`http://localhost:8000/api/articles/${cart[key]._id}`)
         ))
         
-      localStorage.removeItem ("react-shop")
+      
       window.location.reload()  
 
       //prévenir le vendeu de la vente d'un objet 
@@ -148,20 +148,21 @@ const submit= (event) =>{
       .then(res => {
         console.log(res);
         console.log(res.data);
-        alert ("Payement accepté")
+        alert ("Coordonnées enregistrée")
       }) 
 
       }
           });
           
-////////////////////////////////////////::
-
-/////////////////////////////////////////////////////////////////
-
-}
 
 localStorage.setItem('payment', countCartArticles().toFixed(2)) 
 
+
+}
+
+
+const payment= localStorage.getItem("payment")
+console.log(payment)
   return (
     <>
       <div className="panier">
@@ -174,7 +175,7 @@ localStorage.setItem('payment', countCartArticles().toFixed(2))
         <span>vider le caddie</span>
       </div>
 
-      <Table celled padded>
+      <Table celled padded className="table">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell singleLine textAlign="center">
@@ -216,7 +217,7 @@ localStorage.setItem('payment', countCartArticles().toFixed(2))
 
       <div>
 
-      <Form
+      {payment===null &&<Form
       action={submit}      
       onSubmit={submit}
       method="POST"
@@ -245,29 +246,14 @@ localStorage.setItem('payment', countCartArticles().toFixed(2))
       
 
           <Button type="submit"> 
-        Valider et Payer 
+        Valider vos coordonnées et passer au paiement 
         </Button>
-       
-
-        <div id="smart-button-container">
-          <div >
-            <div id="paypal-button-container"></div>
-          </div>
-        </div>
-
+      
 
 
       </div>
-    </Form>
-<StripeContainer/>
-
-
-
-
-
-
-
-
+    </Form>}
+    {payment!==null &&<StripeContainer/>}
 
 
       </div>

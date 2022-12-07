@@ -1,11 +1,15 @@
 import React from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
+import { Table, Icon, Button, Form } from "semantic-ui-react";
 
 
 export const CheckoutForm=()=>{
     const stripe= useStripe();
     const elements= useElements()
+    
+    const price= localStorage.getItem("payment")*100
+    console.log(price)
 
     const handleSubmit= async(event)=>{
         event.preventDefault();
@@ -17,29 +21,35 @@ export const CheckoutForm=()=>{
             console.log ('token généré', paymentMethod)
             try {
                 const {id} = paymentMethod;
-                const response = await axios.post ("http://localhost:8000/stripe",
+                axios.post ("http://localhost:8080/stripe/charge",
                 {
-                    amount: 100,
+                    amount: price,
                     id: id,
                 });
-                if (response.data.success)
+                
                 console.log('paiement réussi');
-
+                alert ("paiement réussi, nous traitons votre commande et vous tenons informé par mail de son envoi")
+                
             }
             catch(error) {
                 console.log("erreur" , error)
+                alert ("paiement en échec, votre carte ne sera pas débitée")
             }
         }
-
+        localStorage.removeItem("payment")
+        localStorage.removeItem ("react-shop")
+        window.location.reload()
     }
+
+    
     return (
-        <form onSubmit={handleSubmit} style ={{maxWidth: 400}}>
+        <Form className= "pay" onSubmit={handleSubmit} style ={{maxWidth: 400,}}>
             <CardElement 
             options={{
                 hidePostalCode: true
             }}
             />
-            <button>Payer</button>
-        </form>
+            <Button>Payer</Button>
+        </Form>
     )
 }

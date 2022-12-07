@@ -14,6 +14,7 @@ export default function BookCard({ data }) {
   function handleAddToCart(data) {
     setAnim(!anim);
     addToCart(data);
+    alert ('produit ajouté à votre panier !')
   }
  
   return (
